@@ -55,6 +55,9 @@ def start():
     elif input1 == "2":
         kunde = login()
         menue()
+    else:
+        print("Ihre Eingabe war ungültig. Versuchen Sie es erneut.")
+        start()
 
 
 def new_account():
@@ -78,7 +81,7 @@ def changing_dispo():
     except TypeError:
         print("Bitte geben Sie eine Zahl von 0 bis 300 ein.")
         changing_dispo()
-    while new_dispo < 0 or new_dispo > 300:
+    if new_dispo < 0 or new_dispo > 300:
         print("Bitte geben Sie eine Zahl von 0 bis 300 ein.")
         changing_dispo()
     kunde.dispo = new_dispo
