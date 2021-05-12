@@ -1,3 +1,6 @@
+import random
+
+
 class Account:
     def __init__(self, accountnumber, balance, dispo):
         self.accountnumber = accountnumber
@@ -25,24 +28,45 @@ class Account:
             zielkonto.deposit(betrag)
 
 
-mein_Konto = Account("12345", 5000, 500)
+mein_Konto = Account("00001", 5000, 500)
 
 
-mein_Zweitkonto = Account("67890", 500, 1500)
+mein_Zweitkonto = Account("00002", 500, 1500)
 
 
 Konten = {
-    "67890": mein_Zweitkonto,
-    "12345": mein_Konto,
+    "00002": mein_Zweitkonto,
+    "00001": mein_Konto,
 
 }
 
 
 kunde = ""
 
+def start():
+    global input1
+    global kunde
+    if input1 == "1":
+        new_account()
+        login()
+        menue()
+    elif input1 == "2":
+        kunde = login()
+        menue()
+
+
+def new_account():
+    new_accountnumber = str(len(Konten) + 1)
+    new_accountvariable = Account(new_accountnumber, 0, 0)
+    Konten[str(new_accountnumber)] = new_accountvariable
+    print("Es wurde erfolgreich ein neues Konto angelegt.")
+    print("Ihre neue Kontonummer ist " + new_accountnumber + ".")
+    print("Bitte notieren Sie sich diese und melden Sie sich mit dieser erneut an.")
+
+
 
 def login():
-    print("(Anmerkung: Kontonummern sind \"12345\" und \"67890\".)")
+    print("(Anmerkung: Debug-Kontonummern sind \"00001\" und \"00002\".)")
     kontonummer = input("Bitte geben Sie Ihre Kontonummer ein: ")
     while Konten.get(kontonummer) == None:
         print("Kontonummer ist ungültig.")
@@ -51,7 +75,7 @@ def login():
 
 
 def input_valid_account():
-    print("(Anmerkung: Kontonummern sind \"12345\" und \"67890\".)")
+    print("(Anmerkung: Debug-Kontonummern sind \"00001\" und \"00002\".)")
     nummer = input()
     while Konten.get(nummer) == None:
         print("Kontonummer ungültig. Versuchen Sie es erneut.")
@@ -123,5 +147,9 @@ def menue():
         menue()
 
 
-kunde = login()
-menue()
+print("Herzlich willkommen zum Bankingsimulator.")
+print("Um ein neues Konto zu erstellen geben Sie bitte \"1\" ein.")
+print("Wenn Sie bereits ein Konto besitzen, dann geben sie bitte \"2\" ein, um zum Login weitergeleitet zu werden.")
+input1 = input("Eingabe: ")
+
+start()
